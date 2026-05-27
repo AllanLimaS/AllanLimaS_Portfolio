@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero';
+import SobreMim from '../../components/SobreMim';
+import Contato from '../../components/Contato';
+import Projetos from '../../components/Projetos';
+import { getEntry, getCollection, render } from 'astro:content';
+import { languages, useTranslations, type Lang } from '../../i18n/translations';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+const heroEntry = await getEntry('secoes', `${lang}/hero`);
+const sobreEntry = await getEntry('secoes', `${lang}/sobre`);
+const contatoEntry = await getEntry('secoes', `${lang}/contato`);
+
+const projetos = await getCollection('projetos', ({ id }) => {
+  return id.startsWith(`${lang}/`);
+});
+
+if (!heroEntry || !sobreEntry || !contatoEntry) {
+  throw new Error(`Seções não encontradas para o idioma: ${lang}`);
+}
+
+const { Content: HeroContent } = await render(heroEntry);
+const { Content: SobreContent } = await render(sobreEntry);
+const { Content: ContatoContent } = await render(contatoEntry);
+---
+
+<Layout title={t('meta.title')} description={t('meta.description')} lang={lang}>
+  <Hero data={heroEntry} lang={lang}>
+    <HeroContent />
+  </Hero>
+
+  <SobreMim data={sobreEntry} lang={lang}>
+    <SobreContent />
+  </SobreMim>
+
+  <Projetos projetos={projetos} lang={lang} />
+
+  <Contato data={contatoEntry} lang={lang}>
+    <ContatoContent />
+  </Contato>
+</Layout>

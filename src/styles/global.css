@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
+
+body {
+  background-color: theme('colors.background');
+  color: theme('colors.on-background');
+  scroll-behavior: smooth;
+}
+
+.glass-card {
+  background: theme('colors.surface-container');
+  border: 1px solid theme('colors.outline-variant');
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: theme('colors.primary');
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 0 20px rgba(163, 67, 54, 0.1);
+  transform: translateY(-8px);
+}
+
+.primary-glow {
+  text-shadow: 0 0 30px rgba(163, 67, 54, 0.4);
+}
+
+.noise-bg {
+  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5DnkukzNdr-tbx1be_twucLeErRV4GAAlRb6ecIRiQ094zGJwcRlkUz9DsmCZDvDlXMNKWk29BZvO6YKdc28zi7zYLIcGkaO_QeKkoKwgkRKcoOGXsPPoFFM-ePUI-ooLrmzJ2WbJex4IoipPY2FCqCji25PVc8J9w01FV0F4nSYA_KKE-3pFmSdSeL0YtrD8giioWG4x2E1ThkA_2L9RvMjkQr_jxK34OF0hFwEpsdb1VCBtFB20W_V0-BpMLSuXr9yHpClwSvJS");
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+}
+
+.asymmetric-radius {
+  border-radius: 2rem 0.5rem 2rem 0.5rem;
+}
+
+.heading-tight {
+  letter-spacing: -0.04em;
+}

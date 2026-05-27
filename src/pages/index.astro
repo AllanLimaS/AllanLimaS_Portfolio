@@ -1,0 +1,21 @@
+---
+// Rota raiz: redireciona para /pt ou /en com base no idioma do browser.
+// Como o site é estático (sem SSR), o redirect é feito via JavaScript no cliente.
+---
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecionando…</title>
+    <script is:inline>
+      // Detecta idioma do browser e redireciona
+      const preferred = navigator.language?.startsWith('pt') ? 'pt' : 'en';
+      window.location.replace('/' + preferred);
+    </script>
+    <noscript>
+      <!-- Fallback sem JS: vai para PT por padrão -->
+      <meta http-equiv="refresh" content="0;url=/pt" />
+    </noscript>
+  </head>
+  <body></body>
+</html>
