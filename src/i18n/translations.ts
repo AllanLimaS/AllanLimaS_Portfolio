@@ -25,15 +25,15 @@ export const ui = {
     'hero.explore': 'Ver Projetos',
 
     // Sobre Mim — cards de skills
-    'about.skill1.title': 'Arquitetura Web',
+    'about.skill1.title': 'Websites',
     'about.skill1.desc':
-      'Frontends acessíveis e escaláveis com backends robustos e nativos na nuvem.',
-    'about.skill2.title': 'RPA Inteligente',
+      'Desenvolvimento e publicação de sites institucionais, landing pages, blogs e lojas virtuais.',
+    'about.skill2.title': 'RPA',
     'about.skill2.desc':
-      'Automação empresarial de tarefas repetitivas e de alto volume.',
-    'about.skill3.title': 'Engenharia de Dados',
+      'Criação de automações para executar tarefas manuais, repetitivas e operacionais com mais eficiência.',
+    'about.skill3.title': 'Dados',
     'about.skill3.desc':
-      'Transformando logs brutos em inteligência de negócios acionável.',
+      'Criação de dashboards e análises para transformar dados em visões mais claras para o negócio.',
 
     // Projetos
     'projects.heading': 'Trabalhos Selecionados',
@@ -70,15 +70,15 @@ export const ui = {
     'hero.explore': 'Explore Projects',
 
     // Sobre Mim — cards de skills
-    'about.skill1.title': 'Web Architecture',
+    'about.skill1.title': 'Websites',
     'about.skill1.desc':
-      'Scalable, accessible frontends & robust, cloud-native backends.',
-    'about.skill2.title': 'Intelligent RPA',
+      'Development and deployment of institutional websites, landing pages, blogs, and online stores.',
+    'about.skill2.title': 'RPA',
     'about.skill2.desc':
-      'Enterprise-grade automation of repetitive, high-volume tasks.',
-    'about.skill3.title': 'Data Engineering',
+      'Creation of automations to execute manual, repetitive, and operational tasks with greater efficiency.',
+    'about.skill3.title': 'Data',
     'about.skill3.desc':
-      'Transforming raw logs into actionable business intelligence.',
+      'Creation of dashboards and analytics to transform data into clearer business insights.',
 
     // Projetos
     'projects.heading': 'Selected Work',

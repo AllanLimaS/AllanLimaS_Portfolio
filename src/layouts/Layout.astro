@@ -21,11 +21,11 @@ const { title, description = 'Portfólio de Allan Lima', lang = 'pt' } = Astro.p
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 		<title>{title}</title>
 	</head>
 	<body class="font-body-md text-on-background selection:bg-secondary-container selection:text-on-secondary-container">
-		<div class="fixed inset-0 noise-bg z-[-1]"></div>
+		<div id="dynamic-bg" class="fixed inset-0 z-[-1] transition-all duration-500 ease-out" style="background: radial-gradient(circle at 50% 50%, #ffffff 0%, #e0e0e0 70%);"></div>
 		<Navbar lang={lang} client:only="react" />
 		<main>
 			<slot />
@@ -55,12 +55,20 @@ const { title, description = 'Portfólio de Allan Lima', lang = 'pt' } = Astro.p
 					observer.observe(el);
 				});
 		
-				// Custom Mouse Shadow Effect
+				// Custom Mouse Shadow Effect & Dynamic Background
 				if (window.innerWidth > 1024) {
+					const dynamicBg = document.getElementById('dynamic-bg');
 					document.addEventListener('mousemove', (e) => {
-						const x = e.clientX / window.innerWidth * 100;
-						const y = e.clientY / window.innerHeight * 100;
+						const x = (e.clientX / window.innerWidth) * 100;
+						const y = (e.clientY / window.innerHeight) * 100;
+						
+						// Subtle red glow on body
 						document.body.style.backgroundImage = `radial-gradient(circle at ${x}% ${y}%, rgba(163, 67, 54, 0.03) 0%, transparent 40%)`;
+						
+						// Spotlight white-to-gray gradient on background
+						if (dynamicBg) {
+							dynamicBg.style.background = `radial-gradient(circle at ${x}% ${y}%, #ffffff 0%, #e0e0e0 70%)`;
+						}
 					});
 				}
 			});

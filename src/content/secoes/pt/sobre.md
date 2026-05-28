@@ -2,6 +2,4 @@
 title: "Sobre Mim"
 ---
 
-Sou apaixonado por tecnologia e resolução de problemas. Com forte background em **Desenvolvimento Web, Automação de Processos (RPA) e Análise de Dados**, eu ajudo empresas a modernizarem sua presença digital e a otimizarem operações internas.
-
-Minha abordagem é prática: entender a dor do cliente, escolher a melhor ferramenta para o trabalho e entregar um resultado que gere valor imediato, seja através de um e-commerce rápido, ou um script de automação de faturamento.
+Sou Allan de Lima da Silva, analista de sistemas júnior na UNIVALI, com atuação em desenvolvimento web, automação de processos e dados. Gosto de transformar demandas técnicas em soluções simples, úteis e bem executadas, tanto no contexto profissional quanto em projetos pessoais.

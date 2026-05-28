@@ -2,7 +2,7 @@
 @config "../../tailwind.config.mjs";
 
 body {
-  background-color: theme('colors.background');
+  background-color: transparent;
   color: theme('colors.on-background');
   scroll-behavior: smooth;
 }
@@ -24,11 +24,6 @@ body {
   text-shadow: 0 0 30px rgba(163, 67, 54, 0.4);
 }
 
-.noise-bg {
-  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5DnkukzNdr-tbx1be_twucLeErRV4GAAlRb6ecIRiQ094zGJwcRlkUz9DsmCZDvDlXMNKWk29BZvO6YKdc28zi7zYLIcGkaO_QeKkoKwgkRKcoOGXsPPoFFM-ePUI-ooLrmzJ2WbJex4IoipPY2FCqCji25PVc8J9w01FV0F4nSYA_KKE-3pFmSdSeL0YtrD8giioWG4x2E1ThkA_2L9RvMjkQr_jxK34OF0hFwEpsdb1VCBtFB20W_V0-BpMLSuXr9yHpClwSvJS");
-  opacity: 0.04;
-  pointer-events: none;
-}
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;

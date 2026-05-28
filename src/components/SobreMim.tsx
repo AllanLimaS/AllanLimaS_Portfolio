@@ -29,9 +29,9 @@ export default function SobreMim({ data, lang, children }: SobreMimProps) {
   ];
 
   return (
-    <section className="py-xxl px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto bg-surface-container-lowest/30 rounded-[3rem]" id="about">
+    <section className="py-xxl px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto" id="about">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8">
-            <div className="text-primary/40 font-display-lg text-4xl opacity-20 select-none">A.</div>
+
             <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg text-on-background heading-tight">
                 {data.data.title || 'Perfil Híbrido.'}
             </h2>
