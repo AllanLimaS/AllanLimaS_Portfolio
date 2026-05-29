@@ -36,13 +36,14 @@ export const ui = {
       'Criação de dashboards e análises para transformar dados em visões mais claras para o negócio.',
 
     // Projetos
-    'projects.heading': 'Trabalhos Selecionados',
-    'projects.subtitle':
-      'Explorando a interseção entre eficiência e design de alto nível.',
+    'projects.heading': 'Projetos',
+    'projects.subtitle': 'Estudos, experimentos e entregas.',
     'projects.filter.all': 'Todos',
     'projects.card.viewDetails': 'Ver Detalhes',
     'projects.card.explore': 'Explorar →',
     'projects.category.dados': 'Dados',
+    'projects.modal.visitSite': 'Acessar Site',
+    'projects.modal.viewOnGitHub': 'Ver no GitHub',
 
     // Contato
     'contact.heading.before': 'Vamos construir algo',
@@ -81,13 +82,14 @@ export const ui = {
       'Creation of dashboards and analytics to transform data into clearer business insights.',
 
     // Projetos
-    'projects.heading': 'Selected Work',
-    'projects.subtitle':
-      'Exploring the intersection of efficiency and high-end design.',
+    'projects.heading': 'Projects',
+    'projects.subtitle': 'Studies, experiments, and deliveries.',
     'projects.filter.all': 'All',
     'projects.card.viewDetails': 'View Details',
     'projects.card.explore': 'Explore →',
     'projects.category.dados': 'Data',
+    'projects.modal.visitSite': 'Visit Site',
+    'projects.modal.viewOnGitHub': 'View on GitHub',
 
     // Contato
     'contact.heading.before': "Let's build something",

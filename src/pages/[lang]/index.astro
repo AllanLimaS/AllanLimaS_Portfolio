@@ -18,9 +18,14 @@ const heroEntry = await getEntry('secoes', `${lang}/hero`);
 const sobreEntry = await getEntry('secoes', `${lang}/sobre`);
 const contatoEntry = await getEntry('secoes', `${lang}/contato`);
 
-const projetos = await getCollection('projetos', ({ id }) => {
+const projetosEntries = await getCollection('projetos', ({ id }) => {
   return id.startsWith(`${lang}/`);
 });
+
+const projetos = projetosEntries.map((entry) => ({
+  id: entry.id,
+  data: entry.data,
+}));
 
 if (!heroEntry || !sobreEntry || !contatoEntry) {
   throw new Error(`Seções não encontradas para o idioma: ${lang}`);
@@ -40,7 +45,7 @@ const { Content: ContatoContent } = await render(contatoEntry);
     <SobreContent />
   </SobreMim>
 
-  <Projetos projetos={projetos} lang={lang} />
+  <Projetos projetos={projetos} lang={lang} client:load />
 
   <Contato data={contatoEntry} lang={lang}>
     <ContatoContent />

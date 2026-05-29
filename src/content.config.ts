@@ -8,21 +8,12 @@ const projetosCollection = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
-    tags: z.array(z.string()),
+    shortDescription: z.string(),
     coverImage: image().optional(),
     link: z.string().url().optional(),
     github: z.string().url().optional(),
-    category: z.enum(['Web', 'RPA', 'Dados']),
-  }),
-});
-
-// Coleção de Serviços
-const servicosCollection = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/servicos" }),
-  schema: z.object({
-    title: z.string(),
-    icon: z.string(), // Pode ser um emoji ou nome de ícone
-    order: z.number(),
+    category: z.array(z.enum(['Web', 'RPA', 'Dados'])),
+    gallery: z.array(image()).optional(),
   }),
 });
 
@@ -39,6 +30,5 @@ const secoesCollection = defineCollection({
 
 export const collections = {
   'projetos': projetosCollection,
-  'servicos': servicosCollection,
   'secoes': secoesCollection,
 };
