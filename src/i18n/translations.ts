@@ -48,6 +48,7 @@ export const ui = {
     // Contato
     'contact.heading.before': 'Vamos construir algo',
     'contact.heading.highlight': 'significativo.',
+    'contact.subtitle': 'Encontre-me em',
 
     // Footer
     'footer.rights': 'TODOS OS DIREITOS RESERVADOS',
@@ -94,6 +95,7 @@ export const ui = {
     // Contato
     'contact.heading.before': "Let's build something",
     'contact.heading.highlight': 'significant.',
+    'contact.subtitle': 'Find me on',
 
     // Footer
     'footer.rights': 'ALL RIGHTS RESERVED',

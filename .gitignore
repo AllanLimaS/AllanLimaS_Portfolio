@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # vscode setting folder
 .vscode/
+
+# card/cover generator — build outputs and python cache
+/CriacaoFotos/**/out/
+/CriacaoFotos/**/__pycache__/
+/CriacaoFotos/**/*.pyc
+
