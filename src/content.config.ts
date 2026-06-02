@@ -12,7 +12,7 @@ const projetosCollection = defineCollection({
     coverImage: image().optional(),
     link: z.string().url().optional(),
     github: z.string().url().optional(),
-    category: z.array(z.enum(['Web', 'RPA', 'Dados'])),
+    category: z.array(z.enum(['Web', 'RPA', 'Dados', 'App'])),
     gallery: z.array(image()).optional(),
   }),
 });

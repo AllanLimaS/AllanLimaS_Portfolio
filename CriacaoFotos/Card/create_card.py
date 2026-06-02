@@ -43,27 +43,48 @@ def create_project_card(
 
     max_text_w = left_w - pad_left - int(card_width * 0.04)
 
+    words = project_name.split()
     title_size = max(36, int(card_height * 0.13))
     font_title = load_font(FONT_BOLD, title_size)
-    while title_size > 28:
+    title_lines = [project_name]
+
+    if len(words) > 1:
+        while title_size >= 32:
+            font_title = load_font(FONT_BOLD, title_size)
+            for i in range(1, len(words)):
+                l1 = ' '.join(words[:i])
+                l2 = ' '.join(words[i:])
+                if font_title.getbbox(l1)[2] <= max_text_w and font_title.getbbox(l2)[2] <= max_text_w:
+                    title_lines = [l1, l2]
+                    break
+            if len(title_lines) > 1:
+                break
+            title_size -= 2
+
+    if len(title_lines) == 1:
+        title_size = max(36, int(card_height * 0.13))
         font_title = load_font(FONT_BOLD, title_size)
-        bbox = font_title.getbbox(project_name)
-        if (bbox[2] - bbox[0]) <= max_text_w:
-            break
-        title_size -= 2
+        while title_size > 32:
+            font_title = load_font(FONT_BOLD, title_size)
+            if font_title.getbbox(project_name)[2] <= max_text_w:
+                break
+            title_size -= 2
 
     tag_size = max(24, int(card_height * 0.075))
     font_tag = load_font(FONT_BOLD, tag_size)
 
+    num_lines = len(title_lines)
+    line_spacing = title_size + 6
     tag_line_h  = int(tag_size * 1.55)
-    title_h     = title_size + 10
+    title_h     = num_lines * line_spacing + 4
     div_top_gap = int(card_height * 0.010)
     div_bot_gap = int(card_height * 0.028)
     line_w = 4
     block_h = title_h + div_top_gap + line_w + div_bot_gap + len(tags) * tag_line_h
     text_y = (card_height - block_h) // 2 - int(card_height * 0.035)
 
-    draw.text((pad_left, text_y), project_name, font=font_title, fill=title_color)
+    for idx, line in enumerate(title_lines):
+        draw.text((pad_left, text_y + idx * line_spacing), line, font=font_title, fill=title_color)
 
     div_y = text_y + title_h + div_top_gap
     draw.line([(pad_left, div_y), (pad_left + max_text_w, div_y)], fill=divider_color, width=line_w)

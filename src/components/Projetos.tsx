@@ -44,6 +44,7 @@ export default function Projetos({ projetos, lang }: ProjetosProps) {
                 <button onClick={() => setActiveFilter('Dados')} className={getFilterClass('Dados')}>
                   {t('projects.category.dados')}
                 </button>
+                <button onClick={() => setActiveFilter('App')} className={getFilterClass('App')}>App</button>
             </div>
         </div>
 

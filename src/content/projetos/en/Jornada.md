@@ -2,7 +2,7 @@
 title: "Jornada"
 description: "An application for logging work hours and managing tickets, built out of a personal need for daily use during the workday. Everything runs locally with no external dependencies."
 shortDescription: "App for time tracking and ticket management."
-category: ["Web"]
+category: ["App"]
 coverImage: ../../../assets/projetos/Jornada_card.webp
 github: "https://github.com/AllanLimaS/Jornada"
 gallery:

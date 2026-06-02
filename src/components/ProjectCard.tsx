@@ -22,16 +22,11 @@ const categoryColors: Record<string, string> = {
   'Web': 'secondary',
   'RPA': 'primary',
   'Dados': 'tertiary',
+  'App': 'primary',
 };
 
 export default function ProjectCard({ projeto, lang, onClick }: ProjectCardProps) {
   const t = useTranslations(lang);
-  const mainCategory = projeto.data.category[0];
-  const color = categoryColors[mainCategory] || 'primary';
-
-  const categoryLabel = mainCategory === 'Dados'
-    ? t('projects.category.dados')
-    : mainCategory;
 
   return (
     <div className="group cursor-pointer" onClick={onClick}>
@@ -44,10 +39,18 @@ export default function ProjectCard({ projeto, lang, onClick }: ProjectCardProps
           </div>
         )}
         <div className="flex items-center justify-between gap-4 px-5 py-3">
-          <span className={`inline-block bg-${color}/10 text-${color} px-3 py-1 rounded-md font-label-sm text-[10px] border border-${color}/20 uppercase tracking-widest`}>
-            {categoryLabel}
-          </span>
-          <p className="text-[10px] text-outline uppercase tracking-[0.2em] font-label-sm">{t('projects.card.viewDetails')}</p>
+          <div className="flex flex-wrap gap-1.5">
+            {projeto.data.category.map((cat) => {
+              const color = categoryColors[cat] || 'primary';
+              const label = cat === 'Dados' ? t('projects.category.dados') : cat;
+              return (
+                <span key={cat} className={`inline-block bg-${color}/10 text-${color} px-3 py-1 rounded-md font-label-sm text-[10px] border border-${color}/20 uppercase tracking-widest`}>
+                  {label}
+                </span>
+              );
+            })}
+          </div>
+          <p className="text-[10px] text-outline uppercase tracking-[0.2em] font-label-sm whitespace-nowrap">{t('projects.card.viewDetails')}</p>
         </div>
       </div>
     </div>
