@@ -9,11 +9,14 @@
     "dev": "node scripts/build-demos.js && astro dev",
     "build:demos": "node scripts/build-demos.js",
     "build": "node scripts/build-demos.js && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "npm run build && wrangler dev",
+    "astro": "astro",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
+    "@astrojs/cloudflare": "^13.6.1",
     "@astrojs/react": "^5.0.5",
     "@tailwindcss/vite": "^4.3.0",
     "@types/react": "^19.2.15",
@@ -25,6 +28,10 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "wrangler": "^4.98.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
