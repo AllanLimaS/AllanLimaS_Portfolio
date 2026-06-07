@@ -14,9 +14,15 @@ export default function Projetos({ projetos, lang }: ProjetosProps) {
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState<any>(null);
 
+  const sortedProjetos = [...projetos].sort((a: any, b: any) => {
+    const orderA = a.data.order ?? 99;
+    const orderB = b.data.order ?? 99;
+    return orderA - orderB;
+  });
+
   const filteredProjetos = activeFilter === 'All' 
-    ? projetos 
-    : projetos.filter((p: any) => p.data.category.includes(activeFilter));
+    ? sortedProjetos 
+    : sortedProjetos.filter((p: any) => p.data.category.includes(activeFilter));
 
   const getFilterClass = (filter: string) => {
     return activeFilter === filter

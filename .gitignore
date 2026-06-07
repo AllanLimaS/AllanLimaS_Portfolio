@@ -26,8 +26,13 @@ pnpm-debug.log*
 # vscode setting folder
 .vscode/
 
+# demo project builds (generated in CI)
+public/projetos/
+.demos-build/
+
 # card/cover generator — build outputs and python cache
 /CriacaoFotos/**/out/
+/CriacaoFotos/in/
 /CriacaoFotos/**/__pycache__/
 /CriacaoFotos/**/*.pyc
 

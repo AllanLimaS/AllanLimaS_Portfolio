@@ -3,6 +3,7 @@ title: "Bússula de Aluguel"
 description: "Uma plataforma inteligente de descoberta de imóveis para aluguel que combina web scraping, um mecanismo de recomendação e um mapa interativo para eliminar o trabalho diário de navegar por portais de aluguel. Construído para uso pessoal enquanto procurava um novo apartamento."
 shortDescription: "Plataforma de descoberta de imóveis com recomendação personalizada."
 category: ["RPA","App"]
+order: 3
 github: "https://github.com/AllanLimaS/Bussola-de-Aluguel"
 coverImage: ../../../assets/projetos/Bussula_card.webp
 gallery:

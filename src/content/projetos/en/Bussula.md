@@ -3,6 +3,7 @@ title: "Bússula de Aluguel"
 description: "An intelligent rental property discovery platform that combines web scraping, a recommendation engine, and an interactive map to eliminate the daily grind of browsing rental portals. Built for personal use while I was looking for a new apartment."
 shortDescription: "Personalized property discovery platform with recommendation engine."
 category: ["RPA","App"]
+order: 3
 github: "https://github.com/AllanLimaS/Bussola-de-Aluguel"
 coverImage: ../../../assets/projetos/Bussula_card.webp
 gallery:

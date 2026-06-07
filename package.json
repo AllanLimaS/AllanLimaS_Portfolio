@@ -6,8 +6,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "node scripts/build-demos.js && astro dev",
+    "build:demos": "node scripts/build-demos.js",
+    "build": "node scripts/build-demos.js && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -22,5 +23,8 @@
     "react-dom": "^19.2.6",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }
