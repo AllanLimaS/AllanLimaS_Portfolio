@@ -41,11 +41,23 @@ const { Content: ContatoContent } = await render(contatoEntry);
     <HeroContent />
   </Hero>
 
+  <div class="flex items-center gap-3 max-w-sm mx-auto my-16 px-margin-mobile">
+    <div class="flex-1 h-px bg-gradient-to-r from-transparent to-outline/40"></div>
+    <div class="w-2 h-2 rounded-sm bg-primary/30 rotate-45"></div>
+    <div class="flex-1 h-px bg-gradient-to-l from-transparent to-outline/40"></div>
+  </div>
+
   <SobreMim data={sobreEntry} lang={lang}>
     <SobreContent />
   </SobreMim>
 
-  <Projetos projetos={projetos} lang={lang} client:load />
+  <div class="flex items-center gap-3 max-w-sm mx-auto my-16 px-margin-mobile">
+    <div class="flex-1 h-px bg-gradient-to-r from-transparent to-outline/40"></div>
+    <div class="w-2 h-2 rounded-sm bg-primary/30 rotate-45"></div>
+    <div class="flex-1 h-px bg-gradient-to-l from-transparent to-outline/40"></div>
+  </div>
+
+  <Projetos projetos={projetos} lang={lang} client:only="react" />
 
   <Contato data={contatoEntry} lang={lang}>
     <ContatoContent />

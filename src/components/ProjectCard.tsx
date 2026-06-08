@@ -18,11 +18,11 @@ interface ProjectCardProps {
   onClick?: () => void;
 }
 
-const categoryColors: Record<string, string> = {
-  'Web': 'secondary',
-  'RPA': 'primary',
-  'Dados': 'tertiary',
-  'App': 'primary',
+const categoryBadgeClasses: Record<string, string> = {
+  'Web': 'bg-secondary/10 text-secondary border border-secondary/20',
+  'RPA': 'bg-primary/10 text-primary border border-primary/20',
+  'Dados': 'bg-tertiary/10 text-tertiary border border-tertiary/20',
+  'App': 'bg-primary/10 text-primary border border-primary/20',
 };
 
 export default function ProjectCard({ projeto, lang, onClick }: ProjectCardProps) {
@@ -41,10 +41,9 @@ export default function ProjectCard({ projeto, lang, onClick }: ProjectCardProps
         <div className="flex items-center justify-between gap-4 px-5 py-3">
           <div className="flex flex-wrap gap-1.5">
             {projeto.data.category.map((cat) => {
-              const color = categoryColors[cat] || 'primary';
               const label = cat === 'Dados' ? t('projects.category.dados') : cat;
               return (
-                <span key={cat} className={`inline-block bg-${color}/10 text-${color} px-3 py-1 rounded-md font-label-sm text-[10px] border border-${color}/20 uppercase tracking-widest`}>
+                <span key={cat} className={`inline-block px-3 py-1 rounded-md font-label-sm text-[10px] uppercase tracking-widest ${categoryBadgeClasses[cat] || categoryBadgeClasses['RPA']}`}>
                   {label}
                 </span>
               );

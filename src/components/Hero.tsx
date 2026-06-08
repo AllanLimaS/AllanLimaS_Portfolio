@@ -12,7 +12,7 @@ export default function Hero({ data, lang, children }: HeroProps) {
   const base = `/${lang}`;
 
   return (
-    <section className="min-h-[90vh] flex flex-col justify-center px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto pt-32 pb-xxl">
+    <section className="min-h-screen flex flex-col justify-center px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto scroll-mt-16" id="hero">
       <div className="max-w-4xl space-y-10">
 
         <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg font-black text-on-background leading-[1.05] heading-tight">
@@ -24,6 +24,7 @@ export default function Hero({ data, lang, children }: HeroProps) {
         <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
           {data.data.subtitle}
         </p>
+        {children && <div className="font-body-md text-on-surface-variant leading-relaxed prose-p:my-0">{children}</div>}
         <div className="flex flex-col sm:flex-row gap-6 pt-6">
           <a className="inline-flex items-center justify-center bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-label-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-xl shadow-secondary-container/20"
             href={`${base}#projects`}>

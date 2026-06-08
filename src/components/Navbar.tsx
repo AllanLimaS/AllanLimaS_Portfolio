@@ -6,9 +6,11 @@ interface NavbarProps {
 }
 
 export default function Navbar({ lang: langProp }: NavbarProps) {
-  // Fallback: detecta o idioma pela URL se a prop não chegar
   const lang: Lang = langProp ?? (typeof window !== 'undefined' && window.location.pathname.startsWith('/en') ? 'en' : 'pt');
   const t = useTranslations(lang);
+
+  const [activeSection, setActiveSection] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleLanguage = () => {
     const target = lang === 'pt' ? '/en' : '/pt';
@@ -17,13 +19,11 @@ export default function Navbar({ lang: langProp }: NavbarProps) {
 
   const base = `/${lang}`;
 
-  const [activeSection, setActiveSection] = useState('');
-
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'projects', 'contact'];
+      const sections = ['hero', 'about', 'projects', 'contact'];
       let current = '';
-      
+
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
@@ -41,30 +41,108 @@ export default function Navbar({ lang: langProp }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const getLinkClass = (section: string) => {
-    return activeSection === section
-      ? "text-primary font-bold border-b-2 border-primary/40 pb-1 font-label-sm transition-all"
-      : "text-on-surface-variant font-label-sm hover:text-primary transition-colors duration-300";
-  };
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const linkClass = (section: string) =>
+    activeSection === section
+      ? 'text-primary font-medium text-sm'
+      : 'text-on-surface-variant/60 hover:text-on-surface transition-colors text-sm';
+
+  const mobileLinkClass = (section: string) =>
+    activeSection === section
+      ? 'text-primary font-medium'
+      : 'text-on-surface-variant hover:text-on-surface transition-colors';
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-background/60 backdrop-blur-xl border-b border-outline-variant/10">
-        <div className="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-7xl mx-auto relative">
-            <div></div>
-            <div className="hidden md:flex items-center gap-12 absolute left-1/2 -translate-x-1/2">
-                <a className={getLinkClass('about')}
-                    href={`${base}#about`}>{t('nav.about')}</a>
-                <a className={getLinkClass('projects')}
-                    href={`${base}#projects`}>{t('nav.projects')}</a>
-                <a className={getLinkClass('contact')}
-                    href={`${base}#contact`}>{t('nav.contact')}</a>
-            </div>
-            <div className="flex gap-4 items-center">
-              <button onClick={toggleLanguage} className="text-on-surface-variant hover:text-primary transition-colors font-label-sm font-bold uppercase tracking-widest" aria-label="Toggle Language">
-                <span className={lang === 'pt' ? 'text-primary' : ''}>pt-br</span> / <span className={lang === 'en' ? 'text-primary' : ''}>en</span>
-              </button>
-            </div>
+    <>
+      <nav className="hidden md:block fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm">
+        <div className="flex items-center justify-between max-w-7xl mx-auto px-8 py-3">
+          <div className="w-24" />
+          <div className="flex items-center gap-10">
+            <a className={linkClass('hero')} href={`${base}#hero`}>
+              {t('nav.home')}
+            </a>
+            <a className={linkClass('about')} href={`${base}#about`}>
+              {t('nav.about')}
+            </a>
+            <a className={linkClass('projects')} href={`${base}#projects`}>
+              {t('nav.projects')}
+            </a>
+            <a className={linkClass('contact')} href={`${base}#contact`}>
+              {t('nav.contact')}
+            </a>
+          </div>
+          <div className="w-24 flex justify-end">
+            <button
+              onClick={toggleLanguage}
+              className="text-xs text-on-surface-variant/50 hover:text-on-surface transition-colors font-medium uppercase tracking-wider"
+              aria-label="Toggle Language"
+            >
+              <span className={lang === 'pt' ? 'text-primary' : ''}>pt</span>
+              <span className="mx-0.5 text-outline-variant/30">/</span>
+              <span className={lang === 'en' ? 'text-primary' : ''}>en</span>
+            </button>
+          </div>
         </div>
-    </nav>
+      </nav>
+
+      <button
+        onClick={() => setMenuOpen(true)}
+        className="md:hidden fixed top-4 right-4 z-50 flex flex-col gap-1 p-2 rounded-full bg-background/90 backdrop-blur-md border border-outline-variant/10 shadow-sm"
+        aria-label="Open menu"
+      >
+        <span className="block w-5 h-px bg-on-surface" />
+        <span className="block w-5 h-px bg-on-surface" />
+        <span className="block w-5 h-px bg-on-surface" />
+      </button>
+
+      <div
+        onClick={() => setMenuOpen(false)}
+        className={`fixed inset-0 z-40 bg-black/20 backdrop-blur-sm transition-opacity duration-300 md:hidden ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+      />
+
+      <div className={`fixed top-0 right-0 h-full w-72 z-50 bg-background border-l border-outline-variant/10 shadow-2xl transition-transform duration-300 ease-out md:hidden ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex justify-end items-center px-6 py-5">
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="p-1 -mr-1 text-on-surface-variant hover:text-on-surface transition-colors"
+            aria-label="Close menu"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="flex flex-col gap-1 px-6">
+          {(['hero', 'about', 'projects', 'contact'] as const).map((section) => (
+            <a
+              key={section}
+              href={`${base}#${section}`}
+              onClick={() => setMenuOpen(false)}
+              className={`py-3 px-3 -mx-3 rounded-lg text-base transition-colors ${mobileLinkClass(section)}`}
+            >
+              {section === 'hero' ? t('nav.home') : t(`nav.${section}` as any)}
+            </a>
+          ))}
+        </div>
+
+        <div className="px-6 py-6">
+          <button
+            onClick={toggleLanguage}
+            className="text-xs text-on-surface-variant/60 hover:text-on-surface transition-colors font-medium uppercase tracking-wider"
+            aria-label="Toggle Language"
+          >
+            <span className={lang === 'pt' ? 'text-primary' : ''}>pt</span>
+            <span className="mx-0.5 text-outline-variant/40">/</span>
+            <span className={lang === 'en' ? 'text-primary' : ''}>en</span>
+          </button>
+        </div>
+      </div>
+    </>
   );
 }

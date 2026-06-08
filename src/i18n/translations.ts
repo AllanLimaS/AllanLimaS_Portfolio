@@ -14,6 +14,7 @@ export const ui = {
       'Portfólio de Allan Lima – Desenvolvimento Web, RPA e Dados.',
 
     // Navbar
+    'nav.home': 'Início',
     'nav.about': 'Sobre',
     'nav.projects': 'Projetos',
     'nav.contact': 'Contato',
@@ -61,6 +62,7 @@ export const ui = {
       "Allan Lima's portfolio - Web Development, RPA and Data.",
 
     // Navbar
+    'nav.home': 'Home',
     'nav.about': 'About',
     'nav.projects': 'Projects',
     'nav.contact': 'Contact',

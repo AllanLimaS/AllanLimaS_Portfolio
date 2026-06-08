@@ -10,6 +10,7 @@ const projetosCollection = defineCollection({
     description: z.string(),
     shortDescription: z.string(),
     coverImage: image().optional(),
+    gallery: z.array(image()).optional(),
     link: z.string().optional(),
     github: z.string().url().optional(),
     category: z.array(z.enum(['Web', 'RPA', 'Dados', 'App'])),

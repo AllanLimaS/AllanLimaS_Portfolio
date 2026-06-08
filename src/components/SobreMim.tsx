@@ -29,7 +29,7 @@ export default function SobreMim({ data, lang, children }: SobreMimProps) {
   ];
 
   return (
-    <section className="py-xxl px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto" id="about">
+    <section className="px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto scroll-mt-16" id="about">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8">
 
             <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg text-on-background heading-tight">
