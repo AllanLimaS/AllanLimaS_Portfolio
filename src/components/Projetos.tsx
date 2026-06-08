@@ -31,7 +31,7 @@ export default function Projetos({ projetos, lang }: ProjetosProps) {
   };
 
   return (
-    <section className="px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto scroll-mt-16" id="projects">
+    <section className="px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">
             <div>
                 <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg text-on-background heading-tight">

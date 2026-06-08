@@ -57,7 +57,9 @@ const { Content: ContatoContent } = await render(contatoEntry);
     <div class="flex-1 h-px bg-gradient-to-l from-transparent to-outline/40"></div>
   </div>
 
-  <Projetos projetos={projetos} lang={lang} client:only="react" />
+  <div id="projects" class="scroll-mt-16">
+    <Projetos projetos={projetos} lang={lang} client:only="react" />
+  </div>
 
   <Contato data={contatoEntry} lang={lang}>
     <ContatoContent />
