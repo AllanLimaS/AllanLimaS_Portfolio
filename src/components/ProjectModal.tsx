@@ -30,6 +30,8 @@ export default function ProjectModal({ projeto, lang, onClose }: ProjectModalPro
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const autoAdvanceRef = useRef<ReturnType<typeof setInterval>>();
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   const hasMultiple = images.length > 1;
 
@@ -84,8 +86,33 @@ export default function ProjectModal({ projeto, lang, onClose }: ProjectModalPro
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
+    previousFocusRef.current = document.activeElement as HTMLElement;
+    dialogRef.current?.focus();
+    return () => {
+      document.body.style.overflow = '';
+      previousFocusRef.current?.focus();
+    };
   }, []);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab' || lightboxOpen) return;
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    dialog.addEventListener('keydown', handleKeyDown);
+    return () => dialog.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -123,6 +150,11 @@ export default function ProjectModal({ projeto, lang, onClose }: ProjectModalPro
       <div
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
         onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        ref={dialogRef}
+        tabIndex={-1}
       >
         <div className="bg-surface-container-high rounded-2xl w-full md:max-w-3xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
           {images.length > 0 && (
@@ -136,13 +168,14 @@ export default function ProjectModal({ projeto, lang, onClose }: ProjectModalPro
                 alt={`${projeto.data.title} - ${currentIndex + 1}`}
                 className="w-full h-full object-cover cursor-zoom-in"
                 onClick={() => openLightbox(currentIndex)}
+                loading={currentIndex === 0 ? 'eager' : 'lazy'}
               />
               {hasMultiple && (
                 <>
                   <button
                     onClick={(e) => { e.stopPropagation(); pauseAutoAdvance(); goPrev(); resumeAutoAdvance(); }}
                     className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/10 hover:bg-black/25 text-white w-11 h-11 rounded-full flex items-center justify-center transition-all active:scale-95"
-                    aria-label="Previous"
+                    aria-label={lang === 'pt' ? 'Imagem anterior' : 'Previous image'}
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="15 18 9 12 15 6" />
@@ -151,7 +184,7 @@ export default function ProjectModal({ projeto, lang, onClose }: ProjectModalPro
                   <button
                     onClick={(e) => { e.stopPropagation(); pauseAutoAdvance(); goNext(); resumeAutoAdvance(); }}
                     className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/10 hover:bg-black/25 text-white w-11 h-11 rounded-full flex items-center justify-center transition-all active:scale-95 touch:manipulation"
-                    aria-label="Next"
+                    aria-label={lang === 'pt' ? 'Próxima imagem' : 'Next image'}
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="9 18 15 12 9 6" />
@@ -173,10 +206,10 @@ export default function ProjectModal({ projeto, lang, onClose }: ProjectModalPro
 
           <div className="p-6 md:p-8 space-y-5 overflow-y-auto flex-1">
             <div className="flex items-start justify-between gap-4">
-              <h2 className="font-headline-md text-xl md:text-2xl heading-tight text-on-background">
+              <h2 id="modal-title" className="font-headline-md text-xl md:text-2xl heading-tight text-on-background">
                 {projeto.data.title}
               </h2>
-              <button onClick={onClose} className="shrink-0 text-on-surface-variant hover:text-on-background transition-colors">
+              <button onClick={onClose} className="shrink-0 text-on-surface-variant hover:text-on-background transition-colors" aria-label={lang === 'pt' ? 'Fechar' : 'Close'}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <line x1="18" y1="6" x2="6" y2="18" />
                   <line x1="6" y1="6" x2="18" y2="18" />
@@ -241,7 +274,7 @@ export default function ProjectModal({ projeto, lang, onClose }: ProjectModalPro
           <button
             onClick={closeLightbox}
             className="absolute top-3 right-3 z-10 text-white/50 hover:text-white transition-colors p-2"
-            aria-label="Close lightbox"
+            aria-label={lang === 'pt' ? 'Fechar visualização' : 'Close lightbox'}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <line x1="18" y1="6" x2="6" y2="18" />
@@ -255,6 +288,7 @@ export default function ProjectModal({ projeto, lang, onClose }: ProjectModalPro
             className="max-w-full max-h-[85vh] object-contain select-none px-2"
             onClick={(e) => e.stopPropagation()}
             draggable={false}
+            loading="lazy"
           />
 
           {hasMultiple && (
@@ -262,7 +296,7 @@ export default function ProjectModal({ projeto, lang, onClose }: ProjectModalPro
               <button
                 onClick={(e) => { e.stopPropagation(); goPrevLightbox(); }}
                 className="absolute left-2 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors p-2"
-                aria-label="Previous"
+                aria-label={lang === 'pt' ? 'Imagem anterior' : 'Previous image'}
               >
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="15 18 9 12 15 6" />
@@ -271,7 +305,7 @@ export default function ProjectModal({ projeto, lang, onClose }: ProjectModalPro
               <button
                 onClick={(e) => { e.stopPropagation(); goNextLightbox(); }}
                 className="absolute right-2 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors p-2"
-                aria-label="Next"
+                aria-label={lang === 'pt' ? 'Próxima imagem' : 'Next image'}
               >
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="9 18 15 12 9 6" />

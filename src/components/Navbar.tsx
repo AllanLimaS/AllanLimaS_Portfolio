@@ -51,6 +51,8 @@ export default function Navbar({ lang: langProp }: NavbarProps) {
       ? 'text-primary font-medium text-sm'
       : 'text-on-surface-variant/60 hover:text-on-surface transition-colors text-sm';
 
+  const isActive = (section: string) => activeSection === section;
+
   const mobileLinkClass = (section: string) =>
     activeSection === section
       ? 'text-primary font-medium'
@@ -61,17 +63,17 @@ export default function Navbar({ lang: langProp }: NavbarProps) {
       <nav className="hidden md:block fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm">
         <div className="flex items-center justify-between max-w-7xl mx-auto px-8 py-3">
           <div className="w-24" />
-          <div className="flex items-center gap-10">
-            <a className={linkClass('hero')} href={`${base}#hero`}>
+          <div className="flex items-center gap-10" role="navigation" aria-label={lang === 'pt' ? 'Navegação principal' : 'Main navigation'}>
+            <a className={linkClass('hero')} href={`${base}#hero`} aria-current={isActive('hero') ? 'true' : undefined}>
               {t('nav.home')}
             </a>
-            <a className={linkClass('about')} href={`${base}#about`}>
+            <a className={linkClass('about')} href={`${base}#about`} aria-current={isActive('about') ? 'true' : undefined}>
               {t('nav.about')}
             </a>
-            <a className={linkClass('projects')} href={`${base}#projects`}>
+            <a className={linkClass('projects')} href={`${base}#projects`} aria-current={isActive('projects') ? 'true' : undefined}>
               {t('nav.projects')}
             </a>
-            <a className={linkClass('contact')} href={`${base}#contact`}>
+            <a className={linkClass('contact')} href={`${base}#contact`} aria-current={isActive('contact') ? 'true' : undefined}>
               {t('nav.contact')}
             </a>
           </div>
@@ -79,7 +81,7 @@ export default function Navbar({ lang: langProp }: NavbarProps) {
             <button
               onClick={toggleLanguage}
               className="text-xs text-on-surface-variant/50 hover:text-on-surface transition-colors font-medium uppercase tracking-wider"
-              aria-label="Toggle Language"
+              aria-label={lang === 'pt' ? 'Mudar para inglês' : 'Switch to Portuguese'}
             >
               <span className={lang === 'pt' ? 'text-primary' : ''}>pt</span>
               <span className="mx-0.5 text-outline-variant/30">/</span>
@@ -92,7 +94,8 @@ export default function Navbar({ lang: langProp }: NavbarProps) {
       <button
         onClick={() => setMenuOpen(true)}
         className="md:hidden fixed top-4 right-4 z-50 flex flex-col gap-1 p-2 rounded-full bg-background/90 backdrop-blur-md border border-outline-variant/10 shadow-sm"
-        aria-label="Open menu"
+        aria-label={lang === 'pt' ? 'Abrir menu' : 'Open menu'}
+        aria-expanded={menuOpen}
       >
         <span className="block w-5 h-px bg-on-surface" />
         <span className="block w-5 h-px bg-on-surface" />
@@ -109,7 +112,7 @@ export default function Navbar({ lang: langProp }: NavbarProps) {
           <button
             onClick={() => setMenuOpen(false)}
             className="p-1 -mr-1 text-on-surface-variant hover:text-on-surface transition-colors"
-            aria-label="Close menu"
+            aria-label={lang === 'pt' ? 'Fechar menu' : 'Close menu'}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <line x1="18" y1="6" x2="6" y2="18" />
@@ -118,13 +121,14 @@ export default function Navbar({ lang: langProp }: NavbarProps) {
           </button>
         </div>
 
-        <div className="flex flex-col gap-1 px-6">
+        <div className="flex flex-col gap-1 px-6" role="navigation" aria-label={lang === 'pt' ? 'Navegação mobile' : 'Mobile navigation'}>
           {(['hero', 'about', 'projects', 'contact'] as const).map((section) => (
             <a
               key={section}
               href={`${base}#${section}`}
               onClick={() => setMenuOpen(false)}
               className={`py-3 px-3 -mx-3 rounded-lg text-base transition-colors ${mobileLinkClass(section)}`}
+              aria-current={isActive(section) ? 'true' : undefined}
             >
               {section === 'hero' ? t('nav.home') : t(`nav.${section}` as any)}
             </a>
@@ -135,7 +139,7 @@ export default function Navbar({ lang: langProp }: NavbarProps) {
           <button
             onClick={toggleLanguage}
             className="text-xs text-on-surface-variant/60 hover:text-on-surface transition-colors font-medium uppercase tracking-wider"
-            aria-label="Toggle Language"
+            aria-label={lang === 'pt' ? 'Mudar para inglês' : 'Switch to Portuguese'}
           >
             <span className={lang === 'pt' ? 'text-primary' : ''}>pt</span>
             <span className="mx-0.5 text-outline-variant/40">/</span>

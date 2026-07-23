@@ -4,4 +4,4 @@ subtitle: "Ready to get your project off the ground or automate that boring proc
 buttonText: "Send E-mail"
 ---
 
-You can also find me on [LinkedIn](https://www.linkedin.com/in/allan-de-lima-da-silva/) or send a [WhatsApp](https://wa.me/5547999999999) for a faster response.
+You can also find me on [LinkedIn](https://www.linkedin.com/in/allan-de-lima-da-silva/).

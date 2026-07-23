@@ -8,9 +8,12 @@ interface Props {
 	title: string;
 	description?: string;
 	lang?: Lang;
+	image?: string;
 }
 
-const { title, description = 'Portfólio de Allan Lima', lang = 'pt' } = Astro.props;
+const siteUrl = 'https://allanlimas.com.br';
+const { title, description = 'Portfólio de Allan Lima', lang = 'pt', image = '/og-image.png' } = Astro.props;
+const ogLocale = lang === 'pt' ? 'pt_BR' : 'en_US';
 ---
 
 <!doctype html>
@@ -23,12 +26,23 @@ const { title, description = 'Portfólio de Allan Lima', lang = 'pt' } = Astro.p
 		<link rel="icon" href="/favicon.ico" sizes="32x32" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="generator" content={Astro.generator} />
-		<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={image.startsWith('http') ? image : siteUrl + image} />
+		<meta property="og:url" content={siteUrl} />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content={ogLocale} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={image.startsWith('http') ? image : siteUrl + image} />
+		<link rel="canonical" href={siteUrl} />
+		<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 		<title>{title}</title>
 	</head>
 	<body class="font-body-md text-on-background selection:bg-secondary-container selection:text-on-secondary-container">
 		<div id="dynamic-bg" class="fixed inset-0 z-[-1] transition-all duration-500 ease-out" style="background: radial-gradient(circle at 50% 50%, #ffffff 0%, #e0e0e0 70%);"></div>
-		<Navbar lang={lang} client:only="react" />
+		<Navbar lang={lang} client:load />
 		<main>
 			<slot />
 		</main>

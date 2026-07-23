@@ -41,16 +41,16 @@ export default function Projetos({ projetos, lang }: ProjetosProps) {
                     {t('projects.subtitle')}
                 </p>
             </div>
-            <div className="flex flex-wrap gap-2">
-                <button onClick={() => setActiveFilter('All')} className={getFilterClass('All')}>
+            <div className="flex flex-wrap gap-2" role="group" aria-label={lang === 'pt' ? 'Filtrar projetos' : 'Filter projects'}>
+                <button onClick={() => setActiveFilter('All')} className={getFilterClass('All')} aria-pressed={activeFilter === 'All'}>
                   {t('projects.filter.all')}
                 </button>
-                <button onClick={() => setActiveFilter('RPA')} className={getFilterClass('RPA')}>RPA</button>
-                <button onClick={() => setActiveFilter('Web')} className={getFilterClass('Web')}>Web</button>
-                <button onClick={() => setActiveFilter('Dados')} className={getFilterClass('Dados')}>
+                <button onClick={() => setActiveFilter('RPA')} className={getFilterClass('RPA')} aria-pressed={activeFilter === 'RPA'}>RPA</button>
+                <button onClick={() => setActiveFilter('Web')} className={getFilterClass('Web')} aria-pressed={activeFilter === 'Web'}>Web</button>
+                <button onClick={() => setActiveFilter('Dados')} className={getFilterClass('Dados')} aria-pressed={activeFilter === 'Dados'}>
                   {t('projects.category.dados')}
                 </button>
-                <button onClick={() => setActiveFilter('App')} className={getFilterClass('App')}>App</button>
+                <button onClick={() => setActiveFilter('App')} className={getFilterClass('App')} aria-pressed={activeFilter === 'App'}>App</button>
             </div>
         </div>
 

@@ -29,10 +29,10 @@ export default function ProjectCard({ projeto, lang, onClick }: ProjectCardProps
   const t = useTranslations(lang);
 
   return (
-    <div className="group cursor-pointer" onClick={onClick}>
+    <div className="group cursor-pointer" onClick={onClick} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick?.(); } }} aria-label={`${lang === 'pt' ? 'Ver detalhes de' : 'View details of'} ${projeto.data.title}`}>
       <div className="glass-card asymmetric-radius h-full flex flex-col overflow-hidden relative">
         {projeto.data.coverImage ? (
-          <img alt={projeto.data.title} className="w-full flex-1 min-h-0 object-cover rounded-t-xl" src={projeto.data.coverImage.src} />
+          <img alt={`${projeto.data.title}${lang === 'pt' ? ' — capa do projeto' : ' — project cover'}`} className="w-full flex-1 min-h-0 object-cover rounded-t-xl" src={projeto.data.coverImage.src} loading="lazy" />
         ) : (
           <div className="w-full flex-1 min-h-0 bg-surface-container-high rounded-t-xl flex items-center justify-center">
             <span className="material-symbols-outlined text-4xl text-outline-variant opacity-50">image</span>
